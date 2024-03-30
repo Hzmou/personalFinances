@@ -7,41 +7,33 @@ edit.
 
 
 There are several ways to implement this solution.  Since this is OOD and OOP,
-we should use classes.  First a Stock object which has
-properties for the company name, an array of quotes, and  7 statistical 
-values. The constructor would receive the name and the array of quotes and 
-call each of the private calculation methods (one for each statistic). 
-The Stock object would need a nicely formatted toString method. The details of
-formatted strings are at the end of this document. And you should at the unit test
-for this class before continuing. 
-
-You should create a Portfolio class that has an ArrayList of Stock objects.  If you 
-do the extra credit it will do more things, but otherwise it just needs an addStock()
-method and a getStockAt() method like the ones in the AgilityContest.
+we should do it is as an arraylist of objects, where your Stock object has
+properties for the company name, an array of quotes and the 7 statistical 
+values. The constructor would receive the name and the array of values and 
+call each of the calculation methods (one for each statistic). The object 
+would need a nicely formatted toString method. The details of formatted 
+strings are at the end of this document.
 
 GETTING THE INPUT
 
-So the next goal is to read the data and store it in a Java ArrayList of Stock 
-objects in a Portfolio object.  
+So the first goal is to read the data and store it in an array list of Stock objects
+in a Portfolio object.  
 
 You should create a Scanner to read the data file. Follow the example
-from the readFile in the BookStore project for the try..catch block.
-NOTE: The data is sanitized, you therefore will not need to use 
-try..catch to parse the numerical values in the implementation
-shown below.
+from the readFile in MazeSolver for the try..catch block.
 
 Then a loop structure roughly like
 
 String[] tokens = null;
 
 while (not end of file){
-    1. name gets the value of the nextLine
-    2. String line gets the value of the nextLine
-    3. split the line into separate tokens using spaces as the delimiter
+    name gets the value of the nextLine
+    String line gets the value of the nextLine
+    split the line into separate tokens using spaces as the delimiter
       code: tokens = line.split("[ \\s]"); 
       (hint - the tokens.length is the number of quotes, so you can create an 
         array of exactly the right length for the prices)
-    4. parse the tokens as doubles and put them into an array
+    parse the tokens as doubles and put them into an array
       code:     for (int j = 0; j < tokens.length; j++) {
                     prices[j] = Double.parseDouble(tokens[j]);
                 }
@@ -75,10 +67,13 @@ what you need to do.  We attack it that way here.
 
 Each Stock object should be responsible for calculating it's own statistics.
 The Portfolio object would need to calculate the extra credit statistics.
-Printing the Portfolio should be done by  a toString in the Portfolio class 
-that sends out a String that has the column headings and all of the Stock
-statistics (one per line) concatenated together.  You should use a StringBuilder
-for this.  
+Printing the Portfolio can be handled 3 different ways.  You can write 
+a method in the Portfolio class that sends out the entire ArrayList of 
+stocks and have the driver iterate through the list to print it. Or 
+you can write a method in the Portfolio class that sends out the Stock
+object at a specific location in the ArrayList. Or you can write a toString
+in the Portfolio class that sends out a String that is all of the Stock
+statistics (one per line) concatenated together.
 
 We consider each statistic in turn.  They will all involve keeping track of
 some additional, residual values that summarize what you need to retain
@@ -93,11 +88,11 @@ for (int i = 0; i < c; i++){
     update residual values based on A[i];
 }
 calculate desired statistical value from residual values
-
+(except with an ArrayList, not an array)
 
 Each of the following should be a method in the Stock class.
 
-1. the minimum value:  calcMin(), calculateMinimum(), calculateMinVal()
+1. the minimum value
 
 At the end, you want to have the smallest value that you encountered in the
 whole sequence;  essentially the residual value is the smallest value you 
@@ -131,28 +126,34 @@ minOf(A[0], minSoFar) == A[0]
 
 which will be true provided
 
-A[0] <= minSoFar
+A[i][0] <= minSoFar
 
-So the correct initialaization is minSoFar = A[0].
+for any possible value of A[0].  This reasoning suggests that 
+Double.POSITIVE_INFINITY is the appropriate choice for the initial value of 
+minSoFar, because any double value will be <= Double.POSITIVE_INFINITY.
 
-TEST THIS BEFORE CONTINUING!  Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
-2. the maximum value: calcMax(), calculateMaximum(), ...etc 
+2. the maximum value
 
 This is the flip side of the last one; the same reasoning applies.
 
-TEST THIS BEFORE CONTINUING! Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
 3. the net change
 
-This is simply last value - first value
+Here we need to calculate, at the end of the loop
+
+last value - first value
 
 with the array, this is just
 
 A[n-1] - A[0]
 
+If you don't use an array, you can just save the first value and the 
+last value you read from the line in as you scan it.
 
-TEST THIS BEFORE CONTINUING! Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
 4. the average
 
@@ -160,9 +161,9 @@ the average is defined as   (sum of all values)/n
 
 so this reduces to accumulating the sum of all the array entries and 
 performing the division.  I expect you know how to sum the values in 
-an array.
+an Array / ArrayList
 
-TEST THIS BEFORE CONTINUING! Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
 5. the standard deviation
 
@@ -181,7 +182,7 @@ You are already calculating the average and have n, so all you need is
 to calculate the sum of the squares of the entries A[i] for a stock, and
 you will have all you need to complete the calculation.
 
-TEST THIS BEFORE CONTINUING! Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
 6. length of longest upward trend
 
@@ -252,7 +253,7 @@ n - upwardTrendStartIndices[k-1] - 1
 
 you can get the length of the longest upward trend.
 
-TEST THIS BEFORE CONTINUING! Call this method in the constructor and add the property value to the output in the toString() method... then run the unit test.
+TEST THIS BEFORE CONTINUING!
 
 7. best upward trend growth rate
 
@@ -362,7 +363,7 @@ test0.txt
 test1.txt
 test2.txt
 
-with example results (Your output should go to the console NOT to a file!)
+with example results
 
 out0.txt
 out1.txt

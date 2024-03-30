@@ -8,7 +8,7 @@ public class portfoliomanagment {
 
     private static portfolio portfolio = new portfolio();
 
-    public static void readFile(String fileName) {
+    public  static void readFile(String fileName) {
 
         Scanner inputFile = null;
 
@@ -67,28 +67,42 @@ public class portfoliomanagment {
         System.out.println(str.toString());
     }
 
-    // @SuppressWarnings("empty-statement")
-    public static void main(String args[]) {
+     //@SuppressWarnings("empty-statement")
+    public static void main(String args[]){
 
-        if (args.length == 0) {
+      if(args.length ==0){
 
-            System.out.println("NO arguments founded");
-            return;
+        System.out.println("NO arguments founded");
+        return;
 
-        }
 
-        readFile(args[0]);
-        printLabel();
+      }
+     
 
-        // this for loop get the stock at X. for every company.
+     readFile(args[0]);
+     
+     printLabel();
+    
+     
+    
+        //this for loop get the stock at X. for every company.
         for (int x = 0; x < portfolio.getStock().size(); x++) {
 
             System.out.println(portfolio.stockAt(x));
             System.out.print(" ");
         }
+       
+     // int c = new Integer(3);
+     //  System.out.println("c");
+       
+    
+    
+     
+     
+     
+       
+       
 
-        // int c = new Integer(3);
-        // System.out.println("c");
 
     }
 
