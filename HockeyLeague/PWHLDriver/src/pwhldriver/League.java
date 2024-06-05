@@ -119,8 +119,6 @@ public class League{
      * @return A String as specified
      */
     public String update(Scanner scnr){
-        StringBuilder str = new StringBuilder();
-        str.append("update stub");
-        return str.toString();
+        StringBuilder str = new StringBuilder(); str.append("update stub"); return str.toString(); 
+
     }
-}

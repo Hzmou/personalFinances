@@ -8,6 +8,7 @@ public class portfoliomanagment {
 
     private static portfolio portfolio = new portfolio();
 
+
     public static void readFile(String fileName) {
 
         Scanner inputFile = null;
