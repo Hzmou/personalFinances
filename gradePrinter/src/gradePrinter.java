@@ -11,34 +11,34 @@ import java.util.*;
  *
  */
 
-
-
 public class gradePrinter {
 
     public static int[] grades = new int[15];
     public static int[] labels = new int[5];
-   
 
     public static void loadGrades(int[] list)
             throws FileNotFoundException {
+
+        String fileName = null;
         try {
 
             Scanner ReadFile = new Scanner(new FileReader("data.txt"));
-            int tempo , // this is a variable that going to have the number 
-                           //that the scanner read.
+            int tempo, // this is a variable that going to have the number
+                       // that the scanner read.
                     cte = 0; // this is the index of the array list.
             while (ReadFile.hasNext()) {
                 tempo = ReadFile.nextInt();
-                list[cte] = tempo;  // the element is assigned to the value 
-                                 // stored in variable tempo
-                cte = cte + 1;   // the index is incremented to +1.
+                list[cte] = tempo; // the element is assigned to the value
+                                   // stored in variable tempo
+                cte = cte + 1; // the index is incremented to +1.
 
             }
+
         } catch (FileNotFoundException ex) {
-           System.out.println("File not found."); // this is in case the file
-                                                  // is not found
-           System.exit(1);          
-           
+            System.out.println("File not found."); // this is in case the file
+                                                   // is not found
+            System.exit(1);
+
         }
     }
 
@@ -77,9 +77,9 @@ public class gradePrinter {
 
         int min = list[0];
 
-        for (int j=0;j< list.length;j++) {
+        for (int j = 0; j < list.length; j++) {
 
-            if (list[j]< min) {
+            if (list[j] < min) {
                 min = list[j];
             }
         }
@@ -107,7 +107,7 @@ public class gradePrinter {
 
     public static int calcBelowTarget(int[] list, double target) {
         int counter = 0;
-        for (int i=0;i< list.length;i++) {
+        for (int i = 0; i < list.length; i++) {
             if (list[i] < target) {
                 counter++;
 
@@ -120,7 +120,7 @@ public class gradePrinter {
 
     public static void calcFrequencies(int[] list, int[] f) {
 
-        for (int i=0; i< list.length;i++) {
+        for (int i = 0; i < list.length; i++) {
 
             if (list[i] >= 90) {
                 f[0]++;
@@ -171,28 +171,21 @@ public class gradePrinter {
 
     }
 
-
-
-    
-
     public static void main(String[] args) throws FileNotFoundException {
 
-         double average;
-         DecimalFormat df = new DecimalFormat("0.00");
-         
-          loadGrades(grades);
-          printResults(grades);
+        double average;
+        DecimalFormat df = new DecimalFormat("0.00");
 
-          System.out.println("The maximum grade is: "+calcMax(grades));
-          System.out.println("The minimum Grade is: "+calcMin(grades));
-          average = calcAverage(grades);
-          System.out.println("The class average is: "+df.format(average));
-          System.out.println("The number of grades below average: "+calcBelowTarget(grades,calcAverage(grades)));
-          calcFrequencies(grades, labels);
-          printFrequencies(labels);
+        loadGrades(grades);
+        printResults(grades);
 
-
-        
+        System.out.println("The maximum grade is: " + calcMax(grades));
+        System.out.println("The minimum Grade is: " + calcMin(grades));
+        average = calcAverage(grades);
+        System.out.println("The class average is: " + df.format(average));
+        System.out.println("The number of grades below average: " + calcBelowTarget(grades, calcAverage(grades)));
+        calcFrequencies(grades, labels);
+        printFrequencies(labels);
 
     }
 
